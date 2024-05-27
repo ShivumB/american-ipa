@@ -134,7 +134,7 @@ function draw() {
     text("ENTER", width - 80 - 240, height/2 - 70 + 240);
 
     textSize(12);
-    text("ALT+SHIFT+E", width - 80, height/2 - 70);
+    text("ALT+SHIFT+T", width - 80, height/2 - 70);
 
     for(let i = lives; i < 3; i++) {
         lifeDisplay[i] *= Math.pow(0.9, deltaTime/7);
@@ -157,7 +157,7 @@ function draw() {
 
 function keyPressed() {
     if(keyCode == 13) {
-        if(textbox.value() == data.getString(chosen, 1)) {
+        if(checkAnswer(textbox.value(),  data.getString(chosen, 1))) {
             chosen = (int)(Math.random() * data.getRowCount());
             textbox.value("");
             lives = 3;
@@ -177,4 +177,14 @@ function insertChar(event, elt, char) {
 
     elt.selectionStart = temp + 1;
     elt.selectionEnd = temp + 1;
+}
+
+function checkAnswer(str1, str2) {
+
+    if(str1 == str2) return true;
+
+    if(str1.replaceAll("g", "ɡ") == str2) return true;
+
+    return false;
+
 }
