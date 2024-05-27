@@ -134,7 +134,7 @@ function draw() {
     text("ENTER", width - 80 - 240, height/2 - 70 + 240);
 
     textSize(12);
-    text("ALT+SHIFT+T", width - 80, height/2 - 70);
+    text("ALT+SHIFT+E", width - 80, height/2 - 70);
 
     for(let i = lives; i < 3; i++) {
         lifeDisplay[i] *= Math.pow(0.9, deltaTime/7);
