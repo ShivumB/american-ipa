@@ -1,0 +1,5 @@
+<!-- sample rectangle -->
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <ellipse rx="95" ry="95" cx="100" cy="100" fill="rgb(35,25,66)" />
+  <ellipse rx="50" ry="50" cx="100" cy="100" fill="rgb(224, 177, 203)"/>
+</svg>
