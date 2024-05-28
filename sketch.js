@@ -7,17 +7,13 @@ let lifeDisplay;
 
 let keys;
 
-let textboxWidth;
-
 function preload() {data = loadTable("data/most_common_transcribed_words.csv", "csv")}
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 
     textSize(30);
-    textboxWidth = Math.max(width * 2 / 5, textWidth("US English IPA Transcription") + 100);
-    textbox.size(textboxWidth);
-    textbox.position(width/2 - textboxWidth/2, height/2 - 40);
-
+    textbox.size(textWidth("US English IPA Transcription") + 100);
+    textbox.position(width/2 - (textWidth("US English IPA Transcription") + 100)/2, height/2 - 40);
 }
 
 function setup() {
@@ -28,9 +24,8 @@ function setup() {
     textbox.addClass("textbox");
 
     textSize(30);
-    textboxWidth = Math.max(width * 2 / 5, textWidth("US English IPA Transcription") + 100);
-    textbox.size(textboxWidth);
-    textbox.position(width/2 - textboxWidth/2, height/2 - 40);
+    textbox.size(textWidth("US English IPA Transcription") + 100);
+    textbox.position(width/2 - (textWidth("US English IPA Transcription") + 100)/2, height/2 - 40);
 
     textbox.elt.addEventListener("keydown", function(event) {
 
