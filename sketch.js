@@ -7,10 +7,17 @@ let lifeDisplay;
 
 let keys;
 
+let textboxWidth;
+
 function preload() {data = loadTable("data/most_common_transcribed_words.csv", "csv")}
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
-    textbox.position(width*3/10, height/3);
+
+    textSize(30);
+    textboxWidth = Math.max(width * 2 / 5, textWidth("US English IPA Transcription") + 100);
+    textbox.size(textboxWidth);
+    textbox.position(width/2 - textboxWidth/2, height/2 - 40);
+
 }
 
 function setup() {
@@ -19,7 +26,11 @@ function setup() {
 
     textbox = createInput("");
     textbox.addClass("textbox");
-    textbox.position(width*3/10, height/2 - 40);
+
+    textSize(30);
+    textboxWidth = Math.max(width * 2 / 5, textWidth("US English IPA Transcription") + 100);
+    textbox.size(textboxWidth);
+    textbox.position(width/2 - textboxWidth/2, height/2 - 40);
 
     textbox.elt.addEventListener("keydown", function(event) {
 
@@ -54,15 +65,11 @@ function setup() {
         }
     });
 
-    // textbox.elt.addEventListener("keyup", function(event) {console.log(event.shiftKey);});
-
     chosen = (int)(Math.random() * data.getRowCount());
 
     lives = 3;
 
     lifeDisplay = [20, 20, 20];
-
-    inputtingShortcut = false;
 }
 
 function draw() {
@@ -71,75 +78,77 @@ function draw() {
     fill(224, 177, 203);
     textSize(30);
     textAlign(CENTER, BOTTOM);
-    text("US English IPA Transcription", width/2, height - 160);
+    text("US English IPA Transcription", width/2, height/2 + 40 + 120);
 
     textAlign(CENTER, BOTTOM);
     textSize(80);
     text(data.getString(chosen, 0), width/2, height/2 - 40);
 
     noStroke();
+    //CONSONANT, VOWEL SHORTCUT BOXES
     for(let i = 0; i < 3; i ++) {
         for(let j = 0; j < 3; j++) {
-            rect(40 + 120 * j, height/4 + 120 * i, 80, 100, 15);
-            rect(width - 120 - 120 * j, height/4 + 120 * i, 80, 100, 15);
+            rect(width/2 - 402 - 120 * j, height/2 - 150 + 120 * i, 80, 100, 15);
+            rect(width/2 + 322 + 120 * j, height/2 - 150 + 120 * i, 80, 100, 15);
         }
     }
     
     fill(35, 25, 66);
     textAlign(CENTER, CENTER);
     textSize(60);
-
-    //CONSONANTS
-    text("θ", 40 + 80/2, height/2 - 110);
-    text("ð", 80 + 120, height/2 - 110);
-    text("ʃ", 80 + 240, height/2 - 110);
-    text("ʒ", 40 + 80/2, height/2  - 110 + 120);
-    text("ŋ", 80 + 120, height/2 - 110 + 120);
-    text("ɫ", 80 + 240, height/2 - 110 + 120);
-    text("ɹ", 40 + 80/2, height/2  - 110 + 240);
-    text("ˈ", 80 + 120, height/2 - 110 + 240);
-    text("ˌ", 80 + 240, height/2 - 110 + 240);
-    //VOWELS
-    text("ɝ", width - 120 + 40, height/2 - 110);
-    text("ɛ", width - 240 + 40, height/2 - 110);
-    text("ə", width - 360 + 40, height/2 - 110);
-    text("ʊ", width - 120 + 40, height/2 - 110 + 120);
-    text("ɔ", width - 240 + 40, height/2 - 110 + 120);
-    text("ɪ", width - 360 + 40, height/2 - 110 + 120);
-    text("æ", width - 120 + 40, height/2 - 110 + 240);
-    text("ɑ", width - 240 + 40, height/2 - 110 + 240);
+    //CONSONANT LABELS
+    text("θ", width/2 - 362 - 240, height/2 - 110);
+    text("ð", width/2 - 362 - 120, height/2 - 110);
+    text("ʃ", width/2 - 362, height/2 - 110);
+    text("ʒ", width/2 - 362 - 240, height/2  - 110 + 120);
+    text("ŋ", width/2 - 362 - 120, height/2 - 110 + 120);
+    text("ɫ", width/2 - 362, height/2 - 110 + 120);
+    text("ɹ", width/2 - 362 - 240, height/2  - 110 + 240);
+    text("ˈ", width/2 - 362 - 120, height/2 - 110 + 240);
+    text("ˌ", width/2 - 362, height/2 - 110 + 240);
+    //VOWEL LABELS
+    text("ɝ", width/2 + 362 + 240, height/2 - 110);
+    text("ɛ", width/2 + 362 + 120, height/2 - 110);
+    text("ə", width/2 + 362, height/2 - 110);
+    text("ʊ", width/2 + 362 + 240, height/2 - 110 + 120);
+    text("ɔ", width/2 + 362 + 120, height/2 - 110 + 120);
+    text("ɪ", width/2 + 362, height/2 - 110 + 120);
+    text("æ", width/2 + 362 + 240, height/2 - 110 + 240);
+    text("ɑ", width/2 + 362 + 120, height/2 - 110 + 240);
 
     textSize(15);
-    text("CHECK\nANSWER", width - 360 + 40, height/2 - 110 + 240);
+    text("CHECK\nANSWER", width/2 + 362, height/2 - 110 + 240);
 
     textSize(17);
-    //CONSONANTS
-    text("SHIFT+T", 80, height/2 - 70);
-    text("ALT+T", 80 + 120, height/2 - 70);
-    text("SHIFT+S", 80 + 240, height/2 - 70);
-    text("SHIFT+J", 80, height/2 - 70 + 120);
-    text("SHIFT+N", 80 + 120, height/2 - 70 + 120);
-    text("SHIFT+L", 80 + 240, height/2 - 70 + 120);
-    text("SHIFT+R", 80, height/2 - 70 + 240);
-    text("ALT+'", 80 + 120, height/2 - 70 + 240);
-    text("ALT+,", 80 + 240, height/2 - 70 + 240);
-    //VOWELS
-    text("ALT+E", width - 80 - 120, height/2 - 70);
-    text("SHIFT+E", width - 80 - 240, height/2 - 70);
-    text("SHIFT+U", width - 80, height/2 - 70 + 120);
-    text("SHIFT+C", width - 80 - 120, height/2 - 70 + 120);
-    text("SHIFT+I", width - 80 - 240, height/2 - 70 + 120);
-    text("ALT+A", width - 80, height/2 - 70 + 240);
-    text("SHIFT+A", width - 80 - 120, height/2 - 70 + 240);
-    text("ENTER", width - 80 - 240, height/2 - 70 + 240);
+    //CONSONANT SHORTCUTS
+    text("SHIFT+T", width/2 - 362 - 240, height/2 - 70);
+    text("ALT+T",  width/2 - 362 - 120, height/2 - 70);
+    text("SHIFT+S", width/2 - 362, height/2 - 70);
+    text("SHIFT+J", width/2 - 362 - 240, height/2 - 70 + 120);
+    text("SHIFT+N", width/2 - 362 - 120, height/2 - 70 + 120);
+    text("SHIFT+L", width/2 - 362, height/2 - 70 + 120);
+    text("SHIFT+R", width/2 - 362 - 240, height/2 - 70 + 240);
+    text("ALT+'", width/2 - 362 - 120, height/2 - 70 + 240);
+    text("ALT+,", width/2 - 362, height/2 - 70 + 240);
+    //VOWEL SHORTCUTS
+    text("ALT+E", width/2 + 362 + 120, height/2 - 70);
+    text("SHIFT+E", width/2 + 362, height/2 - 70);
+    text("SHIFT+U", width/2 + 362 + 240, height/2 - 70 + 120);
+    text("SHIFT+C", width/2 + 362 + 120, height/2 - 70 + 120);
+    text("SHIFT+I", width/2 + 362, height/2 - 70 + 120);
+    text("ALT+A", width/2 + 362 + 240, height/2 - 70 + 240);
+    text("SHIFT+A", width/2 + 362 + 120, height/2 - 70 + 240);
+    text("ENTER", width/2 + 362, height/2 - 70 + 240);
 
     textSize(12);
-    text("ALT+SHIFT+E", width - 80, height/2 - 70);
+    text("ALT+SHIFT+E", width/2 + 362 + 240, height/2 - 70);
 
+    //shrink life indicator if corresponding life gone
     for(let i = lives; i < 3; i++) {
         lifeDisplay[i] *= Math.pow(0.9, deltaTime/7);
     }
 
+    //if third life gone, transition to answer
     if(lifeDisplay[0] <= 0.05) {
         fill(224, 177, 203, 255 / 0.05 * (0.05 - lifeDisplay[0]));
         textSize(40);
@@ -180,11 +189,8 @@ function insertChar(event, elt, char) {
 }
 
 function checkAnswer(str1, str2) {
-
     if(str1 == str2) return true;
-
     if(str1.replaceAll("g", "ɡ") == str2) return true;
 
     return false;
-
 }
