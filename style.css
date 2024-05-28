@@ -9,17 +9,11 @@ main, body, head {
     color: rgb(224, 177, 203);
     text-align:center;
     border-bottom: 3px solid rgb(224, 177, 203);
-  
-    width:40%;
-  
-    background-color: rgba(255,255,255,0);
+    
+    background-color: transparent;
   
     font-size:xxx-large;
-    font-family: 'Lucida Sans', monospace;
-  }
-  
-  .textbox:focus {
-    background-color: rgba(255,255,255,0);
+    font-family: 'Roboto';
   }
   
   input::-webkit-outer-spin-button,
